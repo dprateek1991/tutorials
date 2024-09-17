@@ -1,6 +1,6 @@
 init:
 	# init project
-	terraform init
+	terraform init -upgrade
 
 get:
 	# get/update modules

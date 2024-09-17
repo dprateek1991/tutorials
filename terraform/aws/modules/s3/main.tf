@@ -1,7 +1,5 @@
 resource "aws_s3_bucket" "s3_bucket" {
   bucket = var.bucket_name
-  acl    = "private"
-  region = var.aws_region
 
   lifecycle {
     prevent_destroy = true
@@ -10,13 +8,18 @@ resource "aws_s3_bucket" "s3_bucket" {
   tags = {
     Name    = var.bucket_name
   }
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
+resource "aws_s3_bucket_ownership_controls" "s3_bucket" {
+  bucket = aws_s3_bucket.s3_bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
   }
+}
 
+resource "aws_s3_bucket_acl" "s3_bucket" {
+  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket]
+
+  bucket = aws_s3_bucket.s3_bucket.id
+  acl    = "private"
 }
