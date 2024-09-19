@@ -8,3 +8,9 @@ variable "bucket_name" {
   type        = string
   description = "S3 Bucket name"
 }
+
+variable "acl" {
+  type        = string
+  default     = "private"
+  description = "ACL"
+}

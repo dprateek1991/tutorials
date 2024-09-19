@@ -9,3 +9,9 @@ variable "bucket_name" {
   description = "S3 Bucket name"
   default     = "temus_s3_tutorial"
 }
+
+variable "acl" {
+  type        = string
+  default     = "private"
+  description = "ACL"
+}

@@ -21,5 +21,5 @@ resource "aws_s3_bucket_acl" "s3_bucket" {
   depends_on = [aws_s3_bucket_ownership_controls.s3_bucket]
 
   bucket = aws_s3_bucket.s3_bucket.id
-  acl    = "private"
+  acl    = var.acl
 }
